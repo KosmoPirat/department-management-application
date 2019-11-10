@@ -60,10 +60,10 @@ class AuthFormContainer extends Component {
         }
         return (
             <form className="col-lg-6 col-sm-1 m-auto h-100 d-flex flex-column justify-content-center" onSubmit={this.validation}>
-                <h1 className="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+                <h1 className="h3 mb-3 font-weight-normal text-center">Authorization</h1>
                 <div className="form-row mb-3">
                     <label htmlFor="inputEmail" className="sr-only">Email address</label>
-                    <input type="input" ref={this.loginRef} className="form-control" placeholder="Your login" required=""
+                    <input type="input" ref={this.loginRef} className="form-control" placeholder="Enter login" required=""
                            autoFocus="" autoComplete="on"/>
                     {!this.state.isValid ?
                         <small className="form-text text-danger"> Login entered incorrectly!</small> :

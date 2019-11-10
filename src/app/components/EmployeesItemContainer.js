@@ -27,9 +27,18 @@ class EmployeesItemContainer extends Component {
                     <td className="d-flex justify-content-between align-items-center pl-3 pr-3">
                         <span className="font-weight-bold">{this.props.e_name}</span>
                         <div className="d-flex justify-content-end">
-                            <button className="btn" onClick={this.delEmployee}>
-                                <FontAwesomeIcon className="text-muted" icon="trash-alt"/>
-                            </button>
+                            <div className="btn-group" role="group">
+                                {
+                                    this.props.isCheckNeed ?
+                                        <label for={`emplCheck${this.props.id}`} className="btn btn-secondary mb-0">
+                                            <input type="checkbox" id={`emplCheck${this.props.id}`} />
+                                        </label> :
+                                        null
+                                }
+                                <button className="btn btn-secondary" onClick={this.delEmployee}>
+                                    <FontAwesomeIcon className="text-light" icon="trash-alt"/>
+                                </button>
+                            </div>
                         </div>
                     </td>
                 </tr>

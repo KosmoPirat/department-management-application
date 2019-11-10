@@ -11,19 +11,12 @@ class DepartmentsContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEditFormVisible: false,
             isAddFormVisible: false
         };
 
-        this.toggleEditFormVisibility = this.toggleEditFormVisibility.bind(this);
         this.toggleAddFormVisibility = this.toggleAddFormVisibility.bind(this);
     }
 
-    toggleEditFormVisibility() {
-        this.setState({
-            isEditFormVisible: !this.state.isEditFormVisible
-        })
-    }
     toggleAddFormVisibility() {
         this.setState({
             isEditFormVisible: !this.state.isEditFormVisible
@@ -32,7 +25,7 @@ class DepartmentsContainer extends Component {
 
     componentDidMount() {
         const { fetchDepartments } = this.props.actions;
-        fetchDepartments();
+        fetchDepartments(this.props.deps);
     }
 
     render() {

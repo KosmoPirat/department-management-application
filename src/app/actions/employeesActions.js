@@ -16,10 +16,10 @@ const fetchEmployeesResolve = (data) => {
 };
 
 
-export const fetchEmployees = () => {
+export const fetchEmployees = (emplsData) => {
     return (dispatch) => {
         dispatch(fetchEmployeesPending);
-        dispatch(fetchEmployeesResolve(emplData));
+        dispatch(fetchEmployeesResolve(emplsData));
     };
 };
 
@@ -42,13 +42,13 @@ const fetchEmployeeResolve = (data) => {
 };
 
 
-export const fetchEmployee = (dep) => {
+export const fetchEmployee = (emplId, emplsData) => {
     return (dispatch) => {
         dispatch(fetchEmployeePending);
-        const departmentData = depsData.find(depItem => {
-            return depItem.id === dep.id;
+        const emplData = emplsData.find(emplItem => {
+            return emplItem.id === emplId;
         });
-        dispatch(fetchEmployeeResolve(departmentData));
+        dispatch(fetchEmployeeResolve(emplData));
     };
 };
 

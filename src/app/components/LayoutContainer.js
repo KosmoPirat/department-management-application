@@ -10,9 +10,10 @@ library.add(faEdit, faTrashAlt, faPlusSquare);
 import routes from '../routes';
 
 import MenuContainer from './MenuContainer';
-import MenuItem from './MenuItem';
+import MenuItemComponent from './MenuItemComponent';
 
-import { setAuth } from '../actions/authAction';
+import * as authActions from '../actions/authAction';
+import {bindActionCreators} from "redux";
 
 class LayoutContainer extends React.Component {
     constructor(props) {
@@ -25,8 +26,9 @@ class LayoutContainer extends React.Component {
     }
 
     verifyAuth() {
+        const { setAuth } = this.props.actions;
         if(localStorage.getItem('auth')) {
-            this.props.changeAuthStatus(true);
+            setAuth(true);
         }
     }
 
@@ -39,17 +41,17 @@ class LayoutContainer extends React.Component {
         return (
             <>
                 <MenuContainer brand={this.brand}>
-                    <MenuItem href="/" active={this.isActive('/department-management-application')}>
+                    <MenuItemComponent href="/" active={this.isActive('/department-management-application/')}>
                         Главная
-                    </MenuItem>
-                    <MenuItem href="/departments" active={this.isActive('/departments')}>
+                    </MenuItemComponent>
+                    <MenuItemComponent href="/departments/" active={this.isActive('/departments/')}>
                         Подразделения
-                    </MenuItem>
-                    <MenuItem href="/employees" active={this.isActive('/employees')}>
+                    </MenuItemComponent>
+                    <MenuItemComponent href="/employees/" active={this.isActive('/employees/')}>
                         Сотрудники
-                    </MenuItem>
+                    </MenuItemComponent>
                 </MenuContainer>
-                <div className="container h-100">
+                <div className="container h-100 mb-5">
                     <div className="row h-100">
                         <div className="col-12 h-100">
                             <Switch>
@@ -58,7 +60,7 @@ class LayoutContainer extends React.Component {
                         </div>
                     </div>
                 </div>
-                <footer className="card-footer">
+                <footer className="card-footer position-fixed fixed-bottom bg-light">
                     &copy; 2019
                 </footer>
             </>
@@ -66,11 +68,12 @@ class LayoutContainer extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-     changeAuthStatus(isAuth) {
-        dispatch(setAuth(isAuth));
-    }
-});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(authActions, dispatch)
+    };
+};
 
 const mapStateToProps = (state) => {
     return {

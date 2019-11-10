@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import DepartmentEditContainer from './DepartmentEditContainer';
+import DepartmentEditFormContainer from './DepartmentEditFormContainer';
 
 
 export default class DepartmentsItemComponent extends Component {
@@ -10,6 +10,7 @@ export default class DepartmentsItemComponent extends Component {
         super(props);
         this.state = {
             isEditFormVisible: false,
+
         };
 
         this.toggleEditFormVisibility = this.toggleEditFormVisibility.bind(this);
@@ -30,15 +31,17 @@ export default class DepartmentsItemComponent extends Component {
                     <td className="d-flex justify-content-between align-items-center pl-3 pr-3">
                         <span className="font-weight-bold">{this.props.d_name}</span>
                         <div className="d-flex justify-content-end">
-                            <button className="btn" onClick={this.toggleEditFormVisibility}>
-                                <FontAwesomeIcon className="text-muted" icon="edit"/>
-                            </button>
-                            <button className="btn">
-                                <FontAwesomeIcon className="text-muted" icon="trash-alt"/>
-                            </button>
+                            <div className="btn-group" role="group">
+                                <button className="btn btn-secondary" onClick={this.toggleEditFormVisibility}>
+                                    <FontAwesomeIcon className="text-light" icon="edit"/>
+                                </button>
+                                <button className="btn btn-secondary">
+                                    <FontAwesomeIcon className="text-light" icon="trash-alt"/>
+                                </button>
+                            </div>
                         </div>
                         {
-                            this.state.isEditFormVisible ? <DepartmentEditContainer {...this.props} toggleVisibility={this.toggleEditFormVisibility}/> : null
+                            this.state.isEditFormVisible ? <DepartmentEditFormContainer {...this.props} toggleVisibility={this.toggleEditFormVisibility}/> : null
                         }
                     </td>
                 </tr>
