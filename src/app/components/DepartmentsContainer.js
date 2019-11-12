@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import DepartmentsItemComponent from './DepartmentsItemContainer';
+import DepartmentsItemContainer from './DepartmentsItemContainer';
 import * as departmentAction from "../actions/departmentsActions";
 
 class DepartmentsContainer extends Component {
@@ -16,12 +16,12 @@ class DepartmentsContainer extends Component {
 
     componentDidMount() {
         const { fetchDepartments } = this.props.actions;
-        fetchDepartments();
+        fetchDepartments(this.props.deps);
     }
 
     render() {
         const departments = this.props.deps.map(dep => {
-            return <DepartmentsItemComponent key={dep.id} {...dep}/>
+            return <DepartmentsItemContainer key={dep.id} {...dep}/>
         });
         return (
             <>

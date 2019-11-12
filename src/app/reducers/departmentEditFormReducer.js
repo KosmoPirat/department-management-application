@@ -2,12 +2,12 @@ export default function reducer(state = {
     isEditFormVisible: false,
     employeesOfDepartment: [],
     restEmployees: [],
+    departmentDataToForm: {},
 
 }, action) {
     switch (action.type) {
 
         case 'FETCH_EMPLOYEE_OF_DEPARTMENT': {
-            console.log(action.payload);
             const { employeesList, employeesOfDepIds } = action.payload;
             const employeesOfDepartment = employeesList.filter(empl => {
                 return employeesOfDepIds.includes(empl.id);
@@ -33,17 +33,19 @@ export default function reducer(state = {
 
 
         case 'DELETE_EMPLOYEES_OF_DEPARTMENT': {
+            const { id } = action.payload;
             return {
                 ...state,
-                employeesOfDepartment: state.employeesOfDepartment.filter(department => department.id !== action.payload),
+                employeesOfDepartment: state.employeesOfDepartment.filter(department => department.id !== id),
 
             }
         }
 
         case 'DELETE_REST_EMPLOYEES': {
+            const { id } = action.payload;
             return {
                 ...state,
-                restEmployees: state.restEmployees.filter(department => department.id !== action.payload),
+                restEmployees: state.restEmployees.filter(department => department.id !== id),
 
             }
         }
@@ -53,6 +55,7 @@ export default function reducer(state = {
             return {
                 ...state,
                 isEditFormVisible: !state.isEditFormVisible,
+                departmentDataToForm: action.payload,
             }
         }
 

@@ -25,7 +25,7 @@ class DepartmentsItemContainer extends Component {
                         <span className="font-weight-bold">{this.props.d_name}</span>
                         <div className="d-flex justify-content-end">
                             <div className="btn-group" role="group">
-                                <button className="btn btn-secondary" onClick={toggleEditFormVisibility}>
+                                <button className="btn btn-secondary" onClick={() => toggleEditFormVisibility(this.props)}>
                                     <FontAwesomeIcon className="text-light" icon="edit"/>
                                 </button>
                                 <button className="btn btn-secondary">
@@ -34,7 +34,7 @@ class DepartmentsItemContainer extends Component {
                             </div>
                         </div>
                         {
-                            this.props.isVisible ? <DepartmentEditFormContainer {...this.props}/> : null
+                            this.props.isVisible ? <DepartmentEditFormContainer/> : null
                         }
                     </td>
                 </tr>

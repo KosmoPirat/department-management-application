@@ -22,10 +22,10 @@ export const fetchDepartments = (depsData) => {
 };
 
 
-const fetchDepartmentPending = () => {
+const fetchDepartmentPending = (data) => {
     return {
         type: 'FETCH_DEPARTMENTS',
-
+        payload: data
     };
 };
 

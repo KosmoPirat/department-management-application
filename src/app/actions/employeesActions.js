@@ -1,9 +1,9 @@
 
 
-const fetchEmployeesPending = () => {
+const fetchEmployeesPending = (data) => {
     return {
         type: 'FETCH_EMPLOYEES',
-
+        payload: data
     };
 };
 

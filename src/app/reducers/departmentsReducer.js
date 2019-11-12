@@ -26,7 +26,7 @@ export default function reducer(state = {
             return {...state, fetching: true}
         }
         case 'FETCH_DEPARTMENTS_FULFILLED': {
-            return {...state, fetching: false, departmentsList: state.departmentsList}
+            return {...state, fetching: false, departmentsList: action.payload}
         }
         case 'FETCH_DEPARTMENTS_REJECTED': {
             return {...state, fetching: false, error: action.payload}
