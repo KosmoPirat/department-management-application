@@ -1,5 +1,4 @@
 
-/*  Fetch Employees action start  */
 
 const fetchEmployeesPending = () => {
     return {
@@ -23,49 +22,14 @@ export const fetchEmployees = (emplsData) => {
     };
 };
 
-/*  Fetch Employees action end  */
 
-/*  Fetch Employee action start  */
-
-const fetchEmployeePending = () => {
+export const updateEmployee = (data) => {
     return {
-        type: 'FETCH_EMPLOYEE',
-
-    };
-};
-
-const fetchEmployeeResolve = (data) => {
-    return {
-        type: 'FETCH_EMPLOYEE_FULFILLED',
+        type: 'UPDATE_EMPLOYEE',
         payload: data
     };
 };
 
-
-export const fetchEmployee = (emplId, emplsData) => {
-    return (dispatch) => {
-        dispatch(fetchEmployeePending);
-        const emplData = emplsData.find(emplItem => {
-            return emplItem.id === emplId;
-        });
-        dispatch(fetchEmployeeResolve(emplData));
-    };
-};
-
-/*  Fetch Employee action end  */
-
-/*  Add Employee action start  */
-
-export const addEmployee = (data) => {
-    return {
-        type: 'ADD_EMPLOYEE',
-        payload: data
-    };
-};
-
-/*  Add Employee action end  */
-
-/*  Delete Employee action start  */
 
 export const deleteEmployee = (employeeId) => {
     return {
@@ -73,5 +37,3 @@ export const deleteEmployee = (employeeId) => {
         payload: employeeId
     };
 };
-
-/*  Add Delete action end  */

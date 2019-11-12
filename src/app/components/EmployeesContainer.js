@@ -14,7 +14,7 @@ class EmployeesContainer extends Component {
 
     componentDidMount() {
         const { fetchEmployees } = this.props.actions;
-        fetchEmployees(this.props.empls);
+        fetchEmployees();
     }
 
     render() {

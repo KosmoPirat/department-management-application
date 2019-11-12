@@ -1,5 +1,4 @@
 
-/*  Fetch Departments action start  */
 const fetchDepartmentsPending = () => {
         return {
             type: 'FETCH_DEPARTMENTS',
@@ -22,9 +21,6 @@ export const fetchDepartments = (depsData) => {
     };
 };
 
-/*  Fetch Departments action end  */
-
-/*  Fetch Department action start  */
 
 const fetchDepartmentPending = () => {
     return {
@@ -43,7 +39,7 @@ const fetchDepartmentResolve = (data) => {
 
 export const fetchDepartment = (dep) => {
     return (dispatch) => {
-        dispatch(fetchDepartmentsPending);
+        dispatch(fetchDepartmentPending);
         const departmentData = depsData.find(depItem => {
             return depItem.id === dep.id;
         });
@@ -51,40 +47,30 @@ export const fetchDepartment = (dep) => {
     };
 };
 
-/*  Fetch Department action end  */
 
-/*  Add Department action start  */
-
-const addDepartment = (data) => {
+export const addDepartment = (data) => {
     return {
         type: 'ADD_DEPARTMENTS',
         payload: data
     };
 };
 
-/*  Add Department action end  */
 
-/*  Update Department action start  */
-
-const updateDepartment = (data) => {
+export const updateDepartment = (data) => {
     return {
-        type: 'UPDATE_DEPARTMENTS',
+        type: 'UPDATE_DEPARTMENT',
         payload: data
     };
 };
 
-/*  Update Department action end  */
 
-/*  Delete Department action start  */
-
-const deleteDepartment = (depId) => {
+export const deleteDepartment = (depId) => {
     return {
         type: 'DELETE_DEPARTMENTS',
         payload: depId
     };
 };
 
-/*  Delete Department action end  */
 
 
 

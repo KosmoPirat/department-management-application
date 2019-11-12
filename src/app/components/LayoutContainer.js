@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faTrashAlt, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-library.add(faEdit, faTrashAlt, faPlusSquare);
+import { faEdit, faTrashAlt, faPlusSquare, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
+library.add(faEdit, faTrashAlt, faPlusSquare, faTimes, faSearch);
 
 
 import routes from '../routes';

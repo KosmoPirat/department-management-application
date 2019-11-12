@@ -16,6 +16,7 @@ export default function reducer(state = {
             d_employees: [2,3]
         }
     ],
+
     fetching: false,
     error: null,
 
@@ -25,7 +26,10 @@ export default function reducer(state = {
             return {...state, fetching: true}
         }
         case 'FETCH_DEPARTMENTS_FULFILLED': {
-            return {...state, fetching: false, departmentsList: action.payload}
+            return {...state, fetching: false, departmentsList: state.departmentsList}
+        }
+        case 'FETCH_DEPARTMENTS_REJECTED': {
+            return {...state, fetching: false, error: action.payload}
         }
 
 
@@ -34,6 +38,9 @@ export default function reducer(state = {
         }
         case 'FETCH_DEPARTMENT_FULFILLED': {
             return {...state, fetching: false, departmentsList: action.payload}
+        }
+        case 'FETCH_DEPARTMENT_REJECTED': {
+            return {...state, fetching: false, error: action.payload}
         }
 
 
@@ -44,6 +51,7 @@ export default function reducer(state = {
 
         case 'UPDATE_DEPARTMENT': {
             const {id} = action.payload;
+            console.log(action.payload);
             const newDepartmentsList = [...state.departmentsList];
             const departmentIdxToUpdate = newDepartmentsList.findIndex(department => department.id === id);
             newDepartmentsList[departmentIdxToUpdate] = action.payload;
@@ -59,6 +67,7 @@ export default function reducer(state = {
 
             }
         }
+
     }
     return state;
 };

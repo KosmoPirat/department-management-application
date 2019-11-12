@@ -4,28 +4,19 @@ import { bindActionCreators } from 'redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import DepartmentsItemComponent from './DepartmentsItemComponent';
+import DepartmentsItemComponent from './DepartmentsItemContainer';
 import * as departmentAction from "../actions/departmentsActions";
 
 class DepartmentsContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isAddFormVisible: false
-        };
 
-        this.toggleAddFormVisibility = this.toggleAddFormVisibility.bind(this);
     }
 
-    toggleAddFormVisibility() {
-        this.setState({
-            isEditFormVisible: !this.state.isEditFormVisible
-        })
-    }
 
     componentDidMount() {
         const { fetchDepartments } = this.props.actions;
-        fetchDepartments(this.props.deps);
+        fetchDepartments();
     }
 
     render() {

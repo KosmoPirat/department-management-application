@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+
+
+import * as departmentsEditFormAction from "../actions/departmentEditFormActions";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import DepartmentEditFormContainer from './DepartmentEditFormContainer';
 
 
-export default class DepartmentsItemComponent extends Component {
+class DepartmentsItemContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isEditFormVisible: false,
-
-        };
-
-        this.toggleEditFormVisibility = this.toggleEditFormVisibility.bind(this);
-    }
-
-    toggleEditFormVisibility() {
-        this.setState({
-            isEditFormVisible: !this.state.isEditFormVisible
-        })
     }
 
     render() {
-
+        const { toggleEditFormVisibility }  = this.props.updateFormActions;
         return (
             <>
                 <tr>
@@ -32,7 +25,7 @@ export default class DepartmentsItemComponent extends Component {
                         <span className="font-weight-bold">{this.props.d_name}</span>
                         <div className="d-flex justify-content-end">
                             <div className="btn-group" role="group">
-                                <button className="btn btn-secondary" onClick={this.toggleEditFormVisibility}>
+                                <button className="btn btn-secondary" onClick={toggleEditFormVisibility}>
                                     <FontAwesomeIcon className="text-light" icon="edit"/>
                                 </button>
                                 <button className="btn btn-secondary">
@@ -41,7 +34,7 @@ export default class DepartmentsItemComponent extends Component {
                             </div>
                         </div>
                         {
-                            this.state.isEditFormVisible ? <DepartmentEditFormContainer {...this.props} toggleVisibility={this.toggleEditFormVisibility}/> : null
+                            this.props.isVisible ? <DepartmentEditFormContainer {...this.props}/> : null
                         }
                     </td>
                 </tr>
@@ -50,4 +43,20 @@ export default class DepartmentsItemComponent extends Component {
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateFormActions: bindActionCreators(departmentsEditFormAction, dispatch),
+
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        isVisible: state.updateForm.isEditFormVisible,
+
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DepartmentsItemContainer);
 

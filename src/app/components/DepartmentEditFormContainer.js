@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
 import * as employeesAction from "../actions/employeesActions";
-import {connect} from "react-redux";
+import * as departmentsAction from "../actions/departmentsActions";
+import * as departmentsEditFormAction from "../actions/departmentEditFormActions";
 
-import EmployeesItemContainer from "./EmployeesItemContainer"
+
+import DepartmentEditFormListEmployees from "./DepartmentEditFormListEmployees";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class DepartmentEditFormContainer extends Component {
@@ -12,45 +15,60 @@ class DepartmentEditFormContainer extends Component {
         super(props);
 
         this.updateDepartment = this.updateDepartment.bind(this);
-
         this.d_nameRef = React.createRef();
-        this.isCheckRef = React.createRef();
-
     }
 
     componentDidMount() {
-        const { fetchEmployees } = this.props.actions;
-        fetchEmployees(this.props.empls);
+        const { fetchEmployees } = this.props.emplActions;
+        fetchEmployees();
+
+        const { fetchEmployeesOfDepartment, fetchRestEmployees } = this.props.updateFormActions;
+
+        fetchEmployeesOfDepartment({
+            employeesList: this.props.empls,
+            employeesOfDepIds: this.props.d_employees
+        });
+        fetchRestEmployees({
+            employeesList: this.props.empls,
+            restEmployeesIds: this.props.d_employees
+        });
+
     }
+
+
 
     updateDepartment() {
-        // Добавление пользователя
-        const deparmentData = {
+        const { updateEmployee } = this.props.emplActions;
+        const { updateDepartment } = this.props.depActions;
+        const d_employeesData = this.state.employeesOfDepartment.map(empl => {
+           return empl.id;
+        });
+        const DepartmentData = {
             id: this.props.id,
             d_name: this.d_nameRef.current.value,
-            username: this.usernameRef.current.value,
-            phone: this.phoneRef.current.value,
-            website: this.websiteRef.current.value,
-            email: this.emailRef.current.value,
-        };
+            d_employees: d_employeesData,
 
-        this.nameRef.current.value = '';
-        this.usernameRef.current.value = '';
-        this.phoneRef.current.value = '';
-        this.websiteRef.current.value = '';
-        this.emailRef.current.value = '';
+        };
+        updateDepartment(DepartmentData);
+        this.state.employeesOfDepartment.forEach(empl => {
+            updateEmployee(empl);
+        });
+
+        this.props.toggleVisibility();
     }
     render() {
-        const employees = this.props.empls.map(empl => {
-            return <EmployeesItemContainer key={empl.id} {...empl} isCheckNeed={true}/>
-        });
+        console.log(this.props);
+        const { toggleEditFormVisibility } = this.props.updateFormActions;
+
         return (
-            <div className="position-absolute card border-secondary mb-5" style={{zIndex:3, top:0, left:0, right:0}}>
+            <div className="position-absolute card border-secondary mb-5 d-flex justify-content-center" style={{zIndex:3, top:0, left:0, right:0}}>
                 <div className="card-header d-flex justify-content-between">
                     <h5 className="pt-2">Form to edit department: <span className="font-weight-bold">{this.props.d_name}</span></h5>
-                    <button onClick={this.props.toggleVisibility} className="btn btn-dark">X</button>
+                    <button onClick={toggleEditFormVisibility} className="btn btn-dark">
+                        <FontAwesomeIcon className="text-light" icon="times"/>
+                    </button>
                 </div>
-                <div className="card-body text-secondary pb-0">
+                <div className="card-body text-secondary col-lg-6 m-auto">
 
                     <div className="form-row mb-3">
                         <div className="input-group">
@@ -61,14 +79,21 @@ class DepartmentEditFormContainer extends Component {
                         </div>
                         <small className="form-text text-danger pl-1">If you don't  change department name, name will remain by default!</small>
                     </div>
-
-                        <table className="table mb-0">
-                            <tbody>
-                                {employees}
-                            </tbody>
-                        </table>
+                    <div className="font-weight-bold text-center">Employees of the department of {this.props.d_name} </div>
+                    {
+                        this.props.employeesOfDepartment.length !== 0 ?
+                            <DepartmentEditFormListEmployees {...this.props} deleteEmployee={true}/> :
+                            <p className="p-3 text-danger text-center">List of department employees is empty</p>
+                    }
+                    <div className="font-weight-bold text-center">To add employees to this department, select one or more from the list</div>
+                    {
+                        this.props.restEmployees.length !== 0 ?
+                            <DepartmentEditFormListEmployees {...this.props} addEmployee={true}/> :
+                            <p className="p-3 text-danger text-center">List of employees to add is empty</p>
+                    }
 
                 </div>
+                <div className="btn btn-secondary mt-3 p-3 font-weight-bold text-uppercase" onClick={this.updateDepartment}>Update department information</div>
             </div>
         );
     }
@@ -76,13 +101,20 @@ class DepartmentEditFormContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(employeesAction, dispatch)
+        emplActions: bindActionCreators(employeesAction, dispatch),
+        depActions: bindActionCreators(departmentsAction, dispatch),
+        updateFormActions: bindActionCreators(departmentsEditFormAction, dispatch),
+
     };
 };
 
 const mapStateToProps = (state) => {
     return {
         empls: state.employees.employeesList,
+        deps: state.departments.departmentsList,
+        isVisible: state.updateForm.isEditFormVisible,
+        employeesOfDepartment: state.updateForm.employeesOfDepartment,
+        restEmployees: state.updateForm.restEmployees,
 
     };
 };
