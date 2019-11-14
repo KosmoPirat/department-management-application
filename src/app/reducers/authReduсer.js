@@ -7,6 +7,10 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
 
+        case 'CHECK_AUTH': {
+            return {...state, isAuth: localStorage.getItem('auth')}
+        }
+
         case 'SET_AUTH': {
             return {...state, isAuth: localStorage.getItem('auth')}
         }

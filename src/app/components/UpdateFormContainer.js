@@ -105,7 +105,7 @@ class UpdateFormContainer extends Component {
                         <textarea ref={this.d_descriptionTextRef}
                                   id="d-description"
                                   className="form-control resize-none"
-                                  placeholder="Enter department name"
+                                  placeholder="Enter department description"
                                   rows="3"
                                   defaultValue={this.props.departmentData.d_description}/>
                     </div>

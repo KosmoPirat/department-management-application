@@ -1,3 +1,9 @@
+export const checkAuth = () => {
+    return {
+        type: 'CHECK_AUTH',
+
+    };
+};
 
 export const setAuth = (isAuth) => {
     localStorage.setItem('auth', isAuth);

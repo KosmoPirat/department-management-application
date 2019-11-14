@@ -26,14 +26,15 @@ class DepartmentsContainer extends Component {
 
     showAddForm() {
         const { toggleAddFormVisibility }  = this.props.addFormActions;
-        const { toggleRedirection }  = this.props.authActions;
-        if (this.props.isAuth !== 'true' ) {
-            toggleRedirection();
-        } else {
+        const { toggleRedirection, checkAuth }  = this.props.authActions;
+        checkAuth();
+        if (this.props.isAuth === 'true' ) {
             toggleAddFormVisibility({
                 formName: 'department',
                 inputName: 'Department name'
             });
+        } else {
+            toggleRedirection();
         }
 
     }

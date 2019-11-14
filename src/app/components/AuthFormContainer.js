@@ -52,7 +52,7 @@ class AuthFormContainer extends Component {
 
         if(this.props.isAuth === 'true') {
             return(
-                <section className="col-lg-6 col-sm-1 m-auto d-flex flex-column justify-content-center align-items-center">
+                <section className="auth-margin col-lg-6 col-sm-1 d-flex flex-column justify-content-center align-items-center">
                     <h3 className="mb-5 text-center">You are already logged in!</h3>
                     <button className="btn btn-dark w-25" onClick={this.logOut}>Log out</button>
                 </section>

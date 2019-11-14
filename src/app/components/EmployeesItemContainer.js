@@ -17,11 +17,12 @@ class EmployeesItemContainer extends Component {
 
     delEmployee() {
         const { deleteEmployee } = this.props.employeesActions;
-        const { toggleRedirection } = this.props.authActions;
-        if (this.props.isAuth !== 'true' ) {
-            toggleRedirection();
-        } else {
+        const { toggleRedirection, checkAuth } = this.props.authActions;
+        checkAuth();
+        if (this.props.isAuth === 'true' ) {
             deleteEmployee(this.props.id);
+        } else {
+            toggleRedirection();
         }
     }
 

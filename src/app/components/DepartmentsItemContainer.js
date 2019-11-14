@@ -22,22 +22,24 @@ class DepartmentsItemContainer extends Component {
 
     showUpdateForm() {
         const { toggleUpdateFormVisibility }  = this.props.updateFormActions;
-        const { toggleRedirection }  = this.props.authActions;
-        if (this.props.isAuth !== 'true' ) {
-            toggleRedirection();
-        } else {
+        const { toggleRedirection, checkAuth }  = this.props.authActions;
+        checkAuth();
+        if (this.props.isAuth === 'true' ) {
             toggleUpdateFormVisibility(this.props);
+        } else {
+            toggleRedirection();
         }
 
     }
 
     removeDepartment() {
         const { deleteDepartment } = this.props.departmentsActions;
-        const { toggleRedirection }  = this.props.authActions;
-        if (this.props.isAuth !== 'true' ) {
-            toggleRedirection();
-        } else {
+        const { toggleRedirection, checkAuth }  = this.props.authActions;
+        checkAuth();
+        if (this.props.isAuth === 'true' ) {
             deleteDepartment(this.props.id);
+        } else {
+            toggleRedirection();
         }
 
     }
