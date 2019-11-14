@@ -6,7 +6,7 @@ import * as departmentsActions from "../actions/departmentsActions";
 
 import MainEmployeesItemComponent from "./MainEmployeesItemComponent";
 
-class MainItemComponent extends Component {
+class MainItemContainer extends Component {
 
     render() {
         const d_employees = this.props.employeesList.filter(empl => {
@@ -18,12 +18,12 @@ class MainItemComponent extends Component {
         return (
             <>
                 <div className="col-md-4 mb-4">
-                <div className="card p-0 h-300">
+                <div className="card p-0 h-400">
                     <div className="card-header bg-dark">
                         <h6 className="card-title text-light m-1">{this.props.d_name}</h6>
                     </div>
                     <div className="card-body">
-                        <p className="card-text">Some description of the department</p>
+                        <p className="card-text">{this.props.d_description}</p>
 
                     </div>
                     <div className="card-header card-title font-weight-bold text-center border-top">
@@ -54,4 +54,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainItemComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(MainItemContainer);

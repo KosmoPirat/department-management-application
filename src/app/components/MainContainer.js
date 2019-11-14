@@ -3,14 +3,14 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
 import * as departmentsActions from "../actions/departmentsActions";
-import MainItemComponent from "./MainItemComponent";
+import MainItemComponent from "./MainItemContainer";
 
 class MainContainer extends Component {
 
 
     render() {
         const departmentsList = this.props.departmentsList.map(dep => {
-            return <MainItemComponent key={dep.id} d_employeesIds={dep.d_employees} d_name={dep.d_name}/>
+            return <MainItemComponent key={dep.id} d_employeesIds={dep.d_employees} d_name={dep.d_name} d_description={dep.d_description}/>
         });
         return (
             <>

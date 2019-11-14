@@ -17,6 +17,7 @@ class UpdateFormContainer extends Component {
         this.validation = this.validation.bind(this);
         this.updateDepartment = this.updateDepartment.bind(this);
         this.d_nameRef = React.createRef();
+        this.d_descriptionTextRef = React.createRef();
     }
 
     componentDidMount() {
@@ -57,6 +58,7 @@ class UpdateFormContainer extends Component {
         const DepartmentData = {
             id: this.props.departmentData.id,
             d_name: this.d_nameRef.current.value,
+            d_description: this.d_descriptionTextRef.current.value,
             d_employees: d_employeesData,
 
         };
@@ -98,6 +100,16 @@ class UpdateFormContainer extends Component {
                         }
 
                     </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Department description</label>
+                        <textarea ref={this.d_descriptionTextRef}
+                                  id="d-description"
+                                  className="form-control resize-none"
+                                  placeholder="Enter department name"
+                                  rows="3"
+                                  defaultValue={this.props.departmentData.d_description}/>
+                    </div>
+
                     <div className="font-weight-bold text-center text-info mb-2">Employees of the department of {this.props.departmentData.d_name} </div>
                     {
                         this.props.employeesOfDepartment.length !== 0 ?

@@ -67,14 +67,14 @@ class EmployeesContainer extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {
-                            this.props.isVisible ?
-                                <AddFormContainer/> :
-                                null
-                        }
                             {employees}
                         </tbody>
                     </table>
+                    {
+                        this.props.isVisible ?
+                            <AddFormContainer/> :
+                            null
+                    }
                 </div>
             </>
         );

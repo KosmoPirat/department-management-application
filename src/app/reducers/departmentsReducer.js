@@ -3,16 +3,19 @@ const initialState = {
         {
             id: 1,
             d_name: "Dep1",
+            d_description: "Some description of the department Dep1",
             d_employees: [1,3]
         },
         {
             id: 2,
             d_name: "Dep2",
+            d_description: "Some description of the department Dep2",
             d_employees: [2,1]
         },
         {
             id: 3,
             d_name: "Dep3",
+            d_description: "Some description of the department Dep3",
             d_employees: [2,3]
         }
     ],
