@@ -35,7 +35,7 @@ class EmployeesItemContainer extends Component {
         return (
             <>
                 <tr>
-                    <th className="pt-3-25 text-center w-5 border-right" scope="row">{this.props.id}</th>
+                    <th className="text-center border-right pt-2-2" scope="row">{this.props.id}</th>
                     <td className="d-flex justify-content-between align-items-center pl-3 pr-3">
                         <span className="font-weight-bold">{this.props.e_name} <small className="text-muted">consists of <strong>{this.props.e_departments.length}</strong> department</small></span>
                         <div className="d-flex justify-content-end">

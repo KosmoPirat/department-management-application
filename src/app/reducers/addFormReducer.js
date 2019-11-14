@@ -1,10 +1,11 @@
-export default function reducer(state = {
+const initialState = {
     isAddFormVisible: false,
     isAddFormValid: true,
     data: {},
     displayData: {},
 
-}, action) {
+};
+export default function reducer(state = initialState, action) {
     switch (action.type) {
 
         case 'TOGGLE_ADD_FORM_VISIBILITY': {
@@ -13,10 +14,6 @@ export default function reducer(state = {
                 isAddFormVisible: !state.isAddFormVisible,
                 displayData: action.payload,
             }
-        }
-
-        case 'ADD_EMPLOYEES': {
-            return {...state, data: action.payload}
         }
 
         case 'TOGGLE_ADD_FORM_VALIDATION': {

@@ -5,8 +5,9 @@ import { Provider } from 'react-redux';
 
 import LayoutContainer from './app/components/LayoutContainer';
 
-import './css/bootstrap.min.css';
-import './js/bootstrap.min.js';
+import './scss/main.scss'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min';
 import 'jquery/dist/jquery.min';
 import 'popper.js/dist/popper.min';
 

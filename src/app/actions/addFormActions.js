@@ -1,9 +1,3 @@
-export const addData = (data) => {
-    return {
-        type: 'ADD_EMPLOYEES_OF_DEPARTMENT',
-        payload: data
-    };
-};
 
 export const toggleAddFormValidation = (isValid) => {
     return {

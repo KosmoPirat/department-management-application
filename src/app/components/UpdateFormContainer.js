@@ -14,6 +14,7 @@ class UpdateFormContainer extends Component {
     constructor(props) {
         super(props);
 
+        this.validation = this.validation.bind(this);
         this.updateDepartment = this.updateDepartment.bind(this);
         this.d_nameRef = React.createRef();
     }
@@ -35,12 +36,21 @@ class UpdateFormContainer extends Component {
 
     }
 
+    validation() {
+        const { toggleUpdateFormValidation } = this.props.updateFormActions;
 
+        if(this.d_nameRef.current.value !== '') {
+            this.updateDepartment();
+        } else {
+            toggleUpdateFormValidation(false);
+        }
+
+    }
 
     updateDepartment() {
         const { updateEmployee } = this.props.employeesActions;
         const { updateDepartment } = this.props.departmentsActions;
-        const { toggleUpdateFormVisibility } = this.props.updateFormActions;
+        const { toggleUpdateFormVisibility, toggleUpdateFormValidation } = this.props.updateFormActions;
         const d_employeesData = this.props.employeesOfDepartment.map(empl => {
             return empl.id;
         });
@@ -58,14 +68,14 @@ class UpdateFormContainer extends Component {
 
             updateEmployee(empl);
         });
-
+        toggleUpdateFormValidation(true);
         toggleUpdateFormVisibility();
     }
     render() {
         const { toggleUpdateFormVisibility } = this.props.updateFormActions;
 
         return (
-            <div className="position-absolute card border-secondary mb-5 d-flex justify-content-center" style={{zIndex:3, top:0, left:0, right:0}}>
+            <div className="position-absolute card border-secondary mb-5 ml-2 mr-2 mt-3 d-flex justify-content-center update-form-position">
                 <div className="card-header d-flex justify-content-between">
                     <h5 className="pt-2">Form to edit department: <span className="font-weight-bold">{this.props.departmentData.d_name}</span></h5>
                     <button onClick={toggleUpdateFormVisibility} className="btn btn-dark">
@@ -81,7 +91,12 @@ class UpdateFormContainer extends Component {
                             </div>
                             <input type="text" ref={this.d_nameRef} className="form-control" placeholder="Enter department name" defaultValue={this.props.departmentData.d_name}/>
                         </div>
-                        <small className="form-text text-info pl-1">If you don't  change department name, name will remain by default!</small>
+                        {
+                            !this.props.isUpdateFormValid ?
+                                <small className="form-text text-danger pl-1">Text field "Department name" must be filled!</small> :
+                                <small className="form-text text-info pl-1">If you don't  change department name, name will remain by default!</small>
+                        }
+
                     </div>
                     <div className="font-weight-bold text-center text-info mb-2">Employees of the department of {this.props.departmentData.d_name} </div>
                     {
@@ -97,7 +112,7 @@ class UpdateFormContainer extends Component {
                     }
 
                 </div>
-                <div className="btn btn-secondary mt-3 p-3 font-weight-bold text-uppercase" onClick={this.updateDepartment}>Update department information</div>
+                <div className="btn btn-info mt-3 p-3 font-weight-bold text-uppercase" onClick={this.validation}>Update department information</div>
             </div>
         );
     }
@@ -119,6 +134,7 @@ const mapStateToProps = (state) => {
         employeesOfDepartment: state.updateForm.employeesOfDepartment,
         restEmployees: state.updateForm.restEmployees,
         departmentData: state.updateForm.departmentData,
+        isUpdateFormValid: state.updateForm.isUpdateFormValid,
 
     };
 };

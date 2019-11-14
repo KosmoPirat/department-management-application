@@ -59,23 +59,19 @@ class AuthFormContainer extends Component {
             );
         }
         return (
-            <form className="col-lg-6 col-sm-1 m-auto d-flex flex-column justify-content-center" onSubmit={this.validation}>
+            <form className="auth-margin col-lg-6 col-sm-1 d-flex flex-column justify-content-center" onSubmit={this.validation}>
                 <h1 className="h3 mb-3 font-weight-normal text-center">Authorization</h1>
                 <div className="form-row mb-3">
                     <label htmlFor="inputEmail" className="sr-only">Email address</label>
                     <input type="input" ref={this.loginRef} className="form-control" placeholder="Enter login" required=""
                            autoFocus="" autoComplete="on"/>
-                    {!this.props.isValid ?
-                        <small className="form-text text-danger"> Login entered incorrectly!</small> :
-                        null
-                    }
                 </div>
                 <div className="form-row mb-3">
                     <label htmlFor="inputPassword" className="sr-only">Password</label>
                     <input type="password" ref={this.passwordRef} className="form-control" placeholder="Password"
                            required="" autoComplete="off"/>
                     {!this.props.isValid ?
-                        <small className="form-text text-danger">Password entered incorrectly!</small>:
+                        <small className="form-text text-danger">There is no user record corresponding to this identifier.</small>:
                         null
                     }
                 </div>

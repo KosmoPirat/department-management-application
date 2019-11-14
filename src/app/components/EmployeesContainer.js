@@ -56,10 +56,10 @@ class EmployeesContainer extends Component {
                     <table className="table table-striped shadow-sm ">
                         <thead className="thead-dark">
                         <tr>
-                            <th className="border-right text-center pb-3-25" scope="col">id</th>
+                            <th className="border-right text-center pb-2-2" scope="col">id</th>
                             <th className="d-flex justify-content-between align-items-center pr-3 pl3" scope="col">
                                 <span>Employees names</span>
-                                <button className="btn" onClick={this.showAddForm}>
+                                <button className="btn btn-outline-light" onClick={this.showAddForm}>
                                     <span className="pr-3 text-light font-weight-bold">Add employee</span>
                                     <FontAwesomeIcon className="text-light" icon="plus-square" size="lg"/>
                                 </button>

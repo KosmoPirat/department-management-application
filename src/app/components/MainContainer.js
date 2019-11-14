@@ -2,19 +2,22 @@ import React, { Component } from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
-import * as employeesActions from "../actions/employeesActions";
 import * as departmentsActions from "../actions/departmentsActions";
-import * as updateFormActions from "../actions/updateFormActions";
+import MainItemComponent from "./MainItemComponent";
 
 class MainContainer extends Component {
 
+
     render() {
+        const departmentsList = this.props.departmentsList.map(dep => {
+            return <MainItemComponent key={dep.id} d_employeesIds={dep.d_employees} d_name={dep.d_name}/>
+        });
         return (
             <>
                 <h1 className="text-center mb-3 mt-3">Department information</h1>
-                <h5 className="text-center mb-4">Нou can find complete information about departments and employees here</h5>
-                <div className="table-responsive">
-                    <p className="text-center">In progress...</p>
+                <h5 className="text-center mb-4">Here you can complete information about departments and employees</h5>
+                <div className="row">
+                    {departmentsList}
                 </div>
 
             </>
@@ -24,20 +27,16 @@ class MainContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        employeesActions: bindActionCreators(employeesActions, dispatch),
         departmentsActions: bindActionCreators(departmentsActions, dispatch),
-        updateFormActions: bindActionCreators(updateFormActions, dispatch),
 
     };
 };
 
 const mapStateToProps = (state) => {
     return {
+        departmentsList: state.departments.departmentsList,
         employeesList: state.employees.employeesList,
-        isVisible: state.updateForm.isUpdateFormVisible,
-        employeesOfDepartment: state.updateForm.employeesOfDepartment,
-        restEmployees: state.updateForm.restEmployees,
-        departmentData: state.updateForm.departmentData,
+        d_employees: state.departments.d_employees,
 
     };
 };

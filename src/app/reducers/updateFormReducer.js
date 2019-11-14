@@ -1,10 +1,12 @@
-export default function reducer(state = {
+const initialState = {
     isUpdateFormVisible: false,
+    isUpdateFormValid: true,
     employeesOfDepartment: [],
     restEmployees: [],
     departmentData: {},
 
-}, action) {
+};
+export default function reducer(state = initialState, action) {
     switch (action.type) {
 
         case 'FETCH_EMPLOYEE_OF_DEPARTMENT': {
@@ -57,6 +59,10 @@ export default function reducer(state = {
                 isUpdateFormVisible: !state.isUpdateFormVisible,
                 departmentData: action.payload,
             }
+        }
+
+        case 'TOGGLE_UPDATE_FORM_VALIDATION': {
+            return {...state, isUpdateFormValid: action.payload}
         }
 
     }

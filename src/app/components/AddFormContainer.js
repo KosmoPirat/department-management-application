@@ -36,19 +36,21 @@ class AddFormContainer extends Component {
         if (this.props.displayData.formName === 'department') {
             const id = this.props.departmentsList[this.props.departmentsList.length-1].id + 1;
             const name = this.inputNameRef.current.value;
-            addDepartment({
-                    id,
-                    d_name: name,
-                    d_employees: []
-                });
+            const deparmentData = {
+                id,
+                d_name: name,
+                d_employees: []
+            };
+            addDepartment(deparmentData);
         } else {
             const id = this.props.employeesList[this.props.employeesList.length-1].id + 1;
             const name = this.inputNameRef.current.value;
-            addEmployee({
+            const employeeData = {
                 id,
                 e_name: name,
                 e_departments: []
-            });
+            };
+            addEmployee(employeeData);
         }
         toggleAddFormValidation(true);
         toggleAddFormVisibility();
@@ -57,7 +59,7 @@ class AddFormContainer extends Component {
         const { toggleAddFormVisibility } = this.props.addFormActions;
 
         return (
-            <div className="position-absolute card border-secondary mb-5 d-flex justify-content-center" style={{zIndex:3, top:150, left:0, right:0}}>
+            <div className="position-absolute card border-secondary mb-5 d-flex justify-content-center add-form-position">
                 <div className="card-header d-flex justify-content-between">
                     <h5 className="pt-2">Form to add {this.props.displayData.formName}</h5>
                     <button onClick={toggleAddFormVisibility} className="btn btn-dark">

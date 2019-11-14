@@ -1,4 +1,4 @@
-export default function reducer(state = {
+const initialState = {
     employeesList: [
         {
             id: 1,
@@ -28,7 +28,8 @@ export default function reducer(state = {
     fetching: false,
     error: null,
 
-}, action) {
+};
+export default function reducer(state = initialState, action) {
     switch (action.type) {
         case 'FETCH_EMPLOYEES': {
             return {...state, fetching: true}

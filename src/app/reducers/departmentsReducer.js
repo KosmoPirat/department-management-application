@@ -1,4 +1,4 @@
-export default function reducer(state = {
+const initialState = {
     departmentsList: [
         {
             id: 1,
@@ -16,11 +16,12 @@ export default function reducer(state = {
             d_employees: [2,3]
         }
     ],
-
+    d_employees: [],
     fetching: false,
     error: null,
 
-}, action) {
+};
+export default function reducer(state = initialState, action) {
     switch (action.type) {
         case 'FETCH_DEPARTMENTS': {
             return {...state, fetching: true}
@@ -45,7 +46,7 @@ export default function reducer(state = {
 
 
         case 'ADD_DEPARTMENT': {
-            return {...state, departmentsList: [action.payload, ...state.departmentsList]}
+            return {...state, departmentsList: [...state.departmentsList, action.payload]}
         }
 
 
@@ -65,6 +66,15 @@ export default function reducer(state = {
                 departmentsList: state.departmentsList.filter(department => department.id !== action.payload),
 
             }
+        }
+
+
+        case 'FETCH_D_EMPLOYEES': {
+            const { employeesList, d_employeesIds } = action.payload;
+            const d_employees = employeesList.filter(empl => {
+                return d_employeesIds.includes(empl.id);
+            });
+            return {...state, d_employees}
         }
 
     }

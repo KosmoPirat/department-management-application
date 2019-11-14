@@ -1,9 +1,10 @@
-export default function reducer(state = {
+const initialState = {
     isAuth: localStorage.getItem('auth'),
     isValid: true,
     isRedirect: false
 
-}, action) {
+};
+export default function reducer(state = initialState, action) {
     switch (action.type) {
 
         case 'SET_AUTH': {

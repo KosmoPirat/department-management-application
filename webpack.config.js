@@ -40,6 +40,23 @@ module.exports = {
                 ]
             },
             {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: { config: { path: `./postcss.config.js` } }
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
+            },
+            {
                 test: /\.svg$/,
                 loader: 'url-loader'
             },
@@ -52,14 +69,10 @@ module.exports = {
                 from: 'src/images/',
                 to: './images/',
                 toType: 'dir'
-            },
-            {
-                from: 'src/static/',
-                to: './static/',
-                toType: 'dir'
             }
         ]),
         new HtmlWebpackPlugin({
+            favicon: "src/images/favicon.png",
             template: "src/index.html",
             filename: "index.html"
         }),

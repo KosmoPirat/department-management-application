@@ -48,4 +48,12 @@ export const toggleUpdateFormVisibility = (dep) => {
     };
 };
 
+export const toggleUpdateFormValidation = (isValid) => {
+    return {
+        type: 'TOGGLE_UPDATE_FORM_VALIDATION',
+        payload: isValid,
+
+    };
+};
+
 

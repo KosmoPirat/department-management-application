@@ -11,7 +11,7 @@ class MenuContainer extends Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <Link to="/" className="navbar-brand">
-                    <img style={{width: "80%"}} src={this.props.brand} alt="Departmets App"/>
+                    <img className="logo-size" src={this.props.brand} alt="Departmets App"/>
                 </Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"

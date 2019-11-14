@@ -21,33 +21,6 @@ export const fetchDepartments = (depsData) => {
     };
 };
 
-
-const fetchDepartmentPending = (data) => {
-    return {
-        type: 'FETCH_DEPARTMENTS',
-        payload: data
-    };
-};
-
-const fetchDepartmentResolve = (data) => {
-    return {
-        type: 'FETCH_DEPARTMENTS_FULFILLED',
-        payload: data
-    };
-};
-
-
-export const fetchDepartment = (dep) => {
-    return (dispatch) => {
-        dispatch(fetchDepartmentPending);
-        const departmentData = depsData.find(depItem => {
-            return depItem.id === dep.id;
-        });
-        dispatch(fetchDepartmentResolve(departmentData));
-    };
-};
-
-
 export const addDepartment = (data) => {
     return {
         type: 'ADD_DEPARTMENT',
@@ -68,6 +41,13 @@ export const deleteDepartment = (depId) => {
     return {
         type: 'DELETE_DEPARTMENT',
         payload: depId
+    };
+};
+
+export const fetchD_Employees = (data) => {
+    return {
+        type: 'FETCH_D_EMPLOYEES',
+        payload: data
     };
 };
 

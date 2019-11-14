@@ -53,12 +53,12 @@ class DepartmentsItemContainer extends Component {
         return (
             <>
                 <tr>
-                    <th className="text-center  border-right" scope="row">{this.props.id}</th>
+                    <th className="text-center  border-right pt-2-2" scope="row">{this.props.id}</th>
                     <td className="d-flex justify-content-between align-items-center pl-3 pr-3">
                         <span className="font-weight-bold">{this.props.d_name}</span>
                         <div className="d-flex justify-content-end">
                             <div className="btn-group" role="group">
-                                <button className="btn btn-secondary" onClick={this.showUpdateForm}>
+                                <button className="btn btn-info" onClick={this.showUpdateForm}>
                                     <FontAwesomeIcon className="text-light" icon="edit"/>
                                 </button>
                                 <button className="btn btn-secondary" onClick={this.removeDepartment}>

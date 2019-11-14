@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faTrashAlt, faPlusSquare, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
-library.add(faEdit, faTrashAlt, faPlusSquare, faTimes, faSearch);
+import { faEdit, faTrashAlt, faPlusSquare, faTimes, faSearch, faUserTie } from '@fortawesome/free-solid-svg-icons';
+library.add(faEdit, faTrashAlt, faPlusSquare, faTimes, faSearch, faUserTie);
 
 
 import routes from '../routes';
