@@ -1,40 +1,73 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
-
-import * as departmentsEditFormAction from "../actions/departmentEditFormActions";
+import * as updateFormActions from "../actions/updateFormActions";
+import * as authActions from "../actions/authActions";
+import * as departmentsActions from "../actions/departmentsActions";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import DepartmentEditFormContainer from './DepartmentEditFormContainer';
+import UpdateFormContainer from './UpdateFormContainer';
 
 
 class DepartmentsItemContainer extends Component {
     constructor(props) {
         super(props);
+
+        this.removeDepartment = this.removeDepartment.bind(this);
+        this.showUpdateForm = this.showUpdateForm.bind(this);
+    }
+
+    showUpdateForm() {
+        const { toggleUpdateFormVisibility }  = this.props.updateFormActions;
+        const { toggleRedirection }  = this.props.authActions;
+        if (this.props.isAuth !== 'true' ) {
+            toggleRedirection();
+        } else {
+            toggleUpdateFormVisibility(this.props);
+        }
+
+    }
+
+    removeDepartment() {
+        const { deleteDepartment } = this.props.departmentsActions;
+        const { toggleRedirection }  = this.props.authActions;
+        if (this.props.isAuth !== 'true' ) {
+            toggleRedirection();
+        } else {
+            deleteDepartment(this.props.id);
+        }
+
     }
 
     render() {
-        const { toggleEditFormVisibility }  = this.props.updateFormActions;
+
+        const { toggleRedirection } = this.props.authActions;
+        if (this.props.isRedirect) {
+            toggleRedirection();
+            return <Redirect to='/auth'/>;
+        }
+
         return (
             <>
                 <tr>
-                    <th className="pt-3-25 text-center w-5 border-right" scope="row">{this.props.id}</th>
+                    <th className="text-center  border-right" scope="row">{this.props.id}</th>
                     <td className="d-flex justify-content-between align-items-center pl-3 pr-3">
                         <span className="font-weight-bold">{this.props.d_name}</span>
                         <div className="d-flex justify-content-end">
                             <div className="btn-group" role="group">
-                                <button className="btn btn-secondary" onClick={() => toggleEditFormVisibility(this.props)}>
+                                <button className="btn btn-secondary" onClick={this.showUpdateForm}>
                                     <FontAwesomeIcon className="text-light" icon="edit"/>
                                 </button>
-                                <button className="btn btn-secondary">
+                                <button className="btn btn-secondary" onClick={this.removeDepartment}>
                                     <FontAwesomeIcon className="text-light" icon="trash-alt"/>
                                 </button>
                             </div>
                         </div>
                         {
-                            this.props.isVisible ? <DepartmentEditFormContainer/> : null
+                            this.props.isVisible ? <UpdateFormContainer/> : null
                         }
                     </td>
                 </tr>
@@ -46,14 +79,17 @@ class DepartmentsItemContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateFormActions: bindActionCreators(departmentsEditFormAction, dispatch),
-
+        updateFormActions: bindActionCreators(updateFormActions, dispatch),
+        authActions: bindActionCreators(authActions, dispatch),
+        departmentsActions: bindActionCreators(departmentsActions, dispatch)
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        isVisible: state.updateForm.isEditFormVisible,
+        isVisible: state.updateForm.isUpdateFormVisible,
+        isAuth: state.auth.isAuth,
+        isRedirect: state.auth.isRedirect,
 
     };
 };

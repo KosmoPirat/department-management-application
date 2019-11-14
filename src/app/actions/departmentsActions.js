@@ -50,7 +50,7 @@ export const fetchDepartment = (dep) => {
 
 export const addDepartment = (data) => {
     return {
-        type: 'ADD_DEPARTMENTS',
+        type: 'ADD_DEPARTMENT',
         payload: data
     };
 };
@@ -66,7 +66,7 @@ export const updateDepartment = (data) => {
 
 export const deleteDepartment = (depId) => {
     return {
-        type: 'DELETE_DEPARTMENTS',
+        type: 'DELETE_DEPARTMENT',
         payload: depId
     };
 };

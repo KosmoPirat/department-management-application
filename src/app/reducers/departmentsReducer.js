@@ -45,13 +45,12 @@ export default function reducer(state = {
 
 
         case 'ADD_DEPARTMENT': {
-            return {...state, usersList: [action.payload, ...state.departmentsList]}
+            return {...state, departmentsList: [action.payload, ...state.departmentsList]}
         }
 
 
         case 'UPDATE_DEPARTMENT': {
             const {id} = action.payload;
-            console.log(action.payload);
             const newDepartmentsList = [...state.departmentsList];
             const departmentIdxToUpdate = newDepartmentsList.findIndex(department => department.id === id);
             newDepartmentsList[departmentIdxToUpdate] = action.payload;

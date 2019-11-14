@@ -22,6 +22,12 @@ export const fetchEmployees = (emplsData) => {
     };
 };
 
+export const addEmployee = (data) => {
+    return {
+        type: 'ADD_EMPLOYEE',
+        payload: data
+    };
+};
 
 export const updateEmployee = (data) => {
     return {

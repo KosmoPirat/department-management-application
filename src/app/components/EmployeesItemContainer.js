@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
+import { Redirect } from 'react-router-dom';
 
-import * as employeesAction from "../actions/employeesActions";
+import * as employeesActions from "../actions/employeesActions";
+import * as authActions from "../actions/authActions";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -14,12 +16,22 @@ class EmployeesItemContainer extends Component {
     }
 
     delEmployee() {
-        const emplId = this.props.id;
-        const { deleteEmployee } = this.props.actions;
-        deleteEmployee(emplId);
+        const { deleteEmployee } = this.props.employeesActions;
+        const { toggleRedirection } = this.props.authActions;
+        if (this.props.isAuth !== 'true' ) {
+            toggleRedirection();
+        } else {
+            deleteEmployee(this.props.id);
+        }
     }
 
     render() {
+        const { toggleRedirection } = this.props.authActions;
+        if (this.props.isRedirect) {
+            toggleRedirection();
+            return <Redirect to='/auth'/>;
+        }
+
         return (
             <>
                 <tr>
@@ -41,13 +53,16 @@ class EmployeesItemContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(employeesAction, dispatch)
+        employeesActions: bindActionCreators(employeesActions, dispatch),
+        authActions: bindActionCreators(authActions, dispatch),
+
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        empls: state.employees.employeesList,
+        isAuth: state.auth.isAuth,
+        isRedirect: state.auth.isRedirect,
 
     };
 };

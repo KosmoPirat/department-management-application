@@ -41,9 +41,9 @@ export const deleteRestEmployees = (employeeId) => {
     };
 };
 
-export const toggleEditFormVisibility = (dep) => {
+export const toggleUpdateFormVisibility = (dep) => {
     return {
-        type: 'TOGGLE_EDIT_FORM_SHOW',
+        type: 'TOGGLE_UPDATE_FORM_VISIBILITY',
         payload: dep
     };
 };

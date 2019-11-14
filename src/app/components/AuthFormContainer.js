@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 
-import { setAuth } from '../actions/authAction';
+import * as authAction from '../actions/authActions';
 
 class AuthFormContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isValid: true,
-            redirect: false,
-
-        };
 
         this.logIn = this.logIn.bind(this);
         this.logOut = this.logOut.bind(this);
@@ -22,50 +18,54 @@ class AuthFormContainer extends Component {
     }
 
     logOut() {
-        localStorage.removeItem('auth');
-        this.props.changeAuthStatus(false);
+        const {  setAuth } = this.props.authActions;
+        setAuth(false);
     }
 
     logIn() {
-        localStorage.setItem('auth','true');
-        this.props.changeAuthStatus(true);
-        this.setState({redirect: true})
+        const { toggleRedirection, setAuth } = this.props.authActions;
+        setAuth(true);
+        toggleRedirection();
     }
 
     validation(event) {
+        const { toggleValidation } = this.props.authActions;
         const login = this.loginRef.current.value;
         const password = this.passwordRef.current.value;
 
-        (login === 'Admin' && password === '12345') ?
-            this.logIn() :
-            this.setState({isValid: !this.state.isValid});
+        if(login === 'Admin' && password === '12345') {
+            this.logIn();
+        } else {
+            toggleValidation(false);
+        }
+
 
         event.preventDefault();
     }
 
     render() {
-        const {redirect} = this.state;
-
-        if (redirect) {
-            return <Redirect to='/'/>
+        const { toggleRedirection } = this.props.authActions;
+        if (this.props.isRedirect) {
+            toggleRedirection();
+            return <Redirect to='/'/>;
         }
 
-        if(this.props.isAuth) {
+        if(this.props.isAuth === 'true') {
             return(
-                <section className="col-lg-6 col-sm-1 m-auto h-100 d-flex flex-column justify-content-center align-items-center">
+                <section className="col-lg-6 col-sm-1 m-auto d-flex flex-column justify-content-center align-items-center">
                     <h3 className="mb-5 text-center">You are already logged in!</h3>
                     <button className="btn btn-dark w-25" onClick={this.logOut}>Log out</button>
                 </section>
             );
         }
         return (
-            <form className="col-lg-6 col-sm-1 m-auto h-100 d-flex flex-column justify-content-center" onSubmit={this.validation}>
+            <form className="col-lg-6 col-sm-1 m-auto d-flex flex-column justify-content-center" onSubmit={this.validation}>
                 <h1 className="h3 mb-3 font-weight-normal text-center">Authorization</h1>
                 <div className="form-row mb-3">
                     <label htmlFor="inputEmail" className="sr-only">Email address</label>
                     <input type="input" ref={this.loginRef} className="form-control" placeholder="Enter login" required=""
                            autoFocus="" autoComplete="on"/>
-                    {!this.state.isValid ?
+                    {!this.props.isValid ?
                         <small className="form-text text-danger"> Login entered incorrectly!</small> :
                         null
                     }
@@ -74,12 +74,12 @@ class AuthFormContainer extends Component {
                     <label htmlFor="inputPassword" className="sr-only">Password</label>
                     <input type="password" ref={this.passwordRef} className="form-control" placeholder="Password"
                            required="" autoComplete="off"/>
-                    {!this.state.isValid ?
+                    {!this.props.isValid ?
                         <small className="form-text text-danger">Password entered incorrectly!</small>:
                         null
                     }
                 </div>
-                <button className="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                <button className="btn btn-lg btn-info btn-block" type="submit">Log in</button>
 
             </form>
 
@@ -88,14 +88,15 @@ class AuthFormContainer extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    changeAuthStatus(isAuth) {
-        dispatch(setAuth(isAuth));
-    }
+    authActions: bindActionCreators(authAction, dispatch),
+
 });
 
 const mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
+        isValid: state.auth.isValid,
+        isRedirect: state.auth.isRedirect,
 
     };
 };

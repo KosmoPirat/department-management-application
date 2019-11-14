@@ -1,24 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import AddFormContainer from "./AddFormContainer";
 import EmployeesItemContainer from './EmployeesItemContainer';
-import * as employeesAction from "../actions/employeesActions";
+
+import * as employeesActions from "../actions/employeesActions";
+import * as addFormActions from "../actions/addFormActions";
+import * as authActions from "../actions/authActions";
 
 class EmployeesContainer extends Component {
     constructor(props) {
         super(props);
+
+        this.showAddForm = this.showAddForm.bind(this);
     }
 
     componentDidMount() {
-        const { fetchEmployees } = this.props.actions;
-        fetchEmployees(this.props.empls);
+        const { fetchEmployees } = this.props.employeesActions;
+        fetchEmployees(this.props.employeesList);
+    }
+
+    showAddForm() {
+        const { toggleAddFormVisibility }  = this.props.addFormActions;
+        const { toggleRedirection }  = this.props.authActions;
+        if (this.props.isAuth !== 'true' ) {
+            toggleRedirection();
+        } else {
+            toggleAddFormVisibility({
+                formName: 'employee',
+                inputName: 'Employee name'
+            });
+        }
+
     }
 
     render() {
-        const employees = this.props.empls.map(empl => {
+        const { toggleRedirection } = this.props.authActions;
+        if (this.props.isRedirect) {
+            toggleRedirection();
+            return <Redirect to='/auth'/>;
+        }
+
+        const employees = this.props.employeesList.map(empl => {
             return <EmployeesItemContainer key={empl.id} {...empl}/>
         });
         return (
@@ -32,7 +59,7 @@ class EmployeesContainer extends Component {
                             <th className="border-right text-center pb-3-25" scope="col">id</th>
                             <th className="d-flex justify-content-between align-items-center pr-3 pl3" scope="col">
                                 <span>Employees names</span>
-                                <button className="btn">
+                                <button className="btn" onClick={this.showAddForm}>
                                     <span className="pr-3 text-light font-weight-bold">Add employee</span>
                                     <FontAwesomeIcon className="text-light" icon="plus-square" size="lg"/>
                                 </button>
@@ -40,6 +67,11 @@ class EmployeesContainer extends Component {
                         </tr>
                         </thead>
                         <tbody>
+                        {
+                            this.props.isVisible ?
+                                <AddFormContainer/> :
+                                null
+                        }
                             {employees}
                         </tbody>
                     </table>
@@ -51,13 +83,19 @@ class EmployeesContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(employeesAction, dispatch)
+        employeesActions: bindActionCreators(employeesActions, dispatch),
+        addFormActions: bindActionCreators(addFormActions, dispatch),
+        authActions: bindActionCreators(authActions, dispatch),
+
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        empls: state.employees.employeesList,
+        employeesList: state.employees.employeesList,
+        isVisible: state.addForm.isAddFormVisible,
+        isAuth: state.auth.isAuth,
+        isRedirect: state.auth.isRedirect,
 
     };
 };

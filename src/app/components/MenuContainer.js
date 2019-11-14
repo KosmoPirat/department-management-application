@@ -6,33 +6,27 @@ import { connect } from 'react-redux';
 class MenuContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            logInTxt: 'Log In',
-            logOutTxt: 'Admin (Log Out)',
-            logInBtnColor: 'btn-primary',
-            logOutBtnColor: 'btn-dark'
-        };
     }
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="container">
-                    <div className="col-9 d-flex">
-                        <Link to="/" className="navbar-brand">
-                            <img style={{width: "80%"}} src={this.props.brand} alt="Departmets App"/>
+                <Link to="/" className="navbar-brand">
+                    <img style={{width: "80%"}} src={this.props.brand} alt="Departmets App"/>
+                </Link>
+                <button className="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul className="navbar-nav mr-auto">
+                        {this.props.children}
+                    </ul>
+                    <form className="form-inline my-2 my-lg-0">
+                        <Link to="/auth" className={`btn ${this.props.isAuth === 'true' ? 'btn-secondary' : 'btn-info'}`}>
+                            {this.props.isAuth === 'true' ? 'Admin (Log Out)' : 'Log In'}
                         </Link>
-
-                        <div className="collapse navbar-collapse ">
-                            <ul className="navbar-nav">
-                                {this.props.children}
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="col-3 justify-content-end">
-                        <Link to="/auth" className={`btn ${this.props.isAuth ? this.state.logOutBtnColor : this.state.logInBtnColor}`}>
-                            {this.props.isAuth ? this.state.logOutTxt : this.state.logInTxt}
-                        </Link>
-                    </div>
+                    </form>
                 </div>
             </nav>
         )

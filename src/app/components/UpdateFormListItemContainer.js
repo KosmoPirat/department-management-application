@@ -4,9 +4,9 @@ import {bindActionCreators} from "redux";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-import * as departmentsEditFormAction from "../actions/departmentEditFormActions";
+import * as departmentsEditFormAction from "../actions/updateFormActions";
 
-class EditFormListItemEmployees extends Component {
+class UpdateFormListItemContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -72,4 +72,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditFormListItemEmployees);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateFormListItemContainer);

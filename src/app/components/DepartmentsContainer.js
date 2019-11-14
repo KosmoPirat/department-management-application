@@ -1,26 +1,51 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Redirect } from 'react-router-dom';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import DepartmentsItemContainer from './DepartmentsItemContainer';
+import AddFormContainer from "./AddFormContainer";
+import DepartmentsItemContainer from "./DepartmentsItemContainer";
+
 import * as departmentAction from "../actions/departmentsActions";
+import * as addFormActions from "../actions/addFormActions";
+import * as authActions from "../actions/authActions";
 
 class DepartmentsContainer extends Component {
     constructor(props) {
         super(props);
 
+        this.showAddForm = this.showAddForm.bind(this);
     }
 
-
     componentDidMount() {
-        const { fetchDepartments } = this.props.actions;
-        fetchDepartments(this.props.deps);
+        const { fetchDepartments } = this.props.departmentAction;
+        fetchDepartments(this.props.departmentList);
+    }
+
+    showAddForm() {
+        const { toggleAddFormVisibility }  = this.props.addFormActions;
+        const { toggleRedirection }  = this.props.authActions;
+        if (this.props.isAuth !== 'true' ) {
+            toggleRedirection();
+        } else {
+            toggleAddFormVisibility({
+                formName: 'department',
+                inputName: 'Department name'
+            });
+        }
+
     }
 
     render() {
-        const departments = this.props.deps.map(dep => {
+        const { toggleRedirection } = this.props.authActions;
+        if (this.props.isRedirect) {
+            toggleRedirection();
+            return <Redirect to='/auth'/>;
+        }
+
+        const departments = this.props.departmentList.map(dep => {
             return <DepartmentsItemContainer key={dep.id} {...dep}/>
         });
         return (
@@ -31,17 +56,22 @@ class DepartmentsContainer extends Component {
                     <table className="table table-striped shadow-sm ">
                         <thead className="thead-dark">
                         <tr>
-                            <th className="border-right text-center pb-3-25" scope="col">id</th>
+                            <th className="text-center" scope="col">id</th>
                             <th className="d-flex justify-content-between align-items-center pr-3 pl3" scope="col">
                                 <span>Department names</span>
-                                <button className="btn">
-                                    <span className="pr-3 text-light font-weight-bold">Add department</span>
+                                <button className="btn" onClick={this.showAddForm}>
+                                    <span className="pr-3 text-light font-weight-bold">Add</span>
                                     <FontAwesomeIcon className="text-light" icon="plus-square" size="lg"/>
                                 </button>
                             </th>
                         </tr>
                         </thead>
                         <tbody>
+                        {
+                            this.props.isVisible ?
+                                <AddFormContainer/> :
+                                null
+                        }
                             {departments}
                         </tbody>
                     </table>
@@ -53,13 +83,18 @@ class DepartmentsContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(departmentAction, dispatch)
+        departmentAction: bindActionCreators(departmentAction, dispatch),
+        addFormActions: bindActionCreators(addFormActions, dispatch),
+        authActions: bindActionCreators(authActions, dispatch),
+
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        deps: state.departments.departmentsList,
+        departmentList: state.departments.departmentsList,
+        isVisible: state.addForm.isAddFormVisible,
+        isAuth: state.auth.isAuth,
 
     };
 };

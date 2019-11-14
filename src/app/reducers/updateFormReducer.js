@@ -1,8 +1,8 @@
 export default function reducer(state = {
-    isEditFormVisible: false,
+    isUpdateFormVisible: false,
     employeesOfDepartment: [],
     restEmployees: [],
-    departmentDataToForm: {},
+    departmentData: {},
 
 }, action) {
     switch (action.type) {
@@ -51,11 +51,11 @@ export default function reducer(state = {
         }
 
 
-        case 'TOGGLE_EDIT_FORM_SHOW': {
+        case 'TOGGLE_UPDATE_FORM_VISIBILITY': {
             return {
                 ...state,
-                isEditFormVisible: !state.isEditFormVisible,
-                departmentDataToForm: action.payload,
+                isUpdateFormVisible: !state.isUpdateFormVisible,
+                departmentData: action.payload,
             }
         }
 

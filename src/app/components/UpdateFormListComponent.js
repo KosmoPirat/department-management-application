@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import EditFormListItemEmployees from "./EditFormListItemEmployees";
+import EditFormListItemEmployees from "./UpdateFormListItemContainer";
 
-export default class DepartmentEditFormListEmployees extends Component {
+export default class UpdateFormListComponent extends Component {
     constructor(props) {
         super(props);
 
