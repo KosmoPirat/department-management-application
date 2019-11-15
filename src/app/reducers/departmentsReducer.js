@@ -2,20 +2,20 @@ const initialState = {
     departmentsList: [
         {
             id: 1,
-            d_name: "Dep1",
-            d_description: "Some description of the department Dep1",
+            d_name: "Logistics",
+            d_description: "Department is engaged in transportation",
             d_employees: [1,3]
         },
         {
             id: 2,
-            d_name: "Dep2",
-            d_description: "Some description of the department Dep2",
+            d_name: "Bookkeeping",
+            d_description: "The department is engaged in financial calculations",
             d_employees: [2,1]
         },
         {
             id: 3,
-            d_name: "Dep3",
-            d_description: "Some description of the department Dep3",
+            d_name: "Advertisements",
+            d_description: "The department supports the image of the company.",
             d_employees: [2,3]
         }
     ],

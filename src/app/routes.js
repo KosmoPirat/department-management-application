@@ -1,28 +1,28 @@
-import MainContainer from './components/MainContainer';
-import AuthFormContainer from './components/AuthFormContainer';
-import Deps from './components/DepartmentsContainer';
-import Empls from './components/EmployeesContainer';
-import PageNotFound from './components/PageNotFoundComponent';
+import Main from './container/MainContainer';
+import AuthForm from './container/AuthFormContainer';
+import Departments from './container/DepartmentsContainer';
+import Employees from './container/EmployeesContainer';
+import PageNotFound from './components/PageNotFound';
 
 export default [
     {
         path: '/',
-        component: MainContainer,
+        component: Main,
         exact: true
     },
     {
         path: '/auth',
-        component: AuthFormContainer,
+        component: AuthForm,
         exact: true
     },
     {
         path: '/departments',
-        component: Deps,
+        component: Departments,
         exact: true
     },
     {
         path: '/employees',
-        component: Empls,
+        component: Employees,
         exact: true
     },
     {

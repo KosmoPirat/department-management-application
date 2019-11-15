@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import EditFormListItemEmployees from "./UpdateFormListItemContainer";
+import UpdateFormListItem from "../container/UpdateFormListItemContainer";
 
-export default class UpdateFormListComponent extends Component {
+export default class UpdateFormList extends Component {
     constructor(props) {
         super(props);
 
@@ -10,15 +10,13 @@ export default class UpdateFormListComponent extends Component {
 
     render() {
         let employees ,restEmployees;
-
         this.props.emplOfDep ?
             employees = this.props.employeesOfDepartment.map(empl => {
-                return <EditFormListItemEmployees key={empl.id} {...empl} emplOfDep={true}/>})
+                return <UpdateFormListItem key={empl.id} {...empl} emplOfDep={true}/>})
             :
             restEmployees = this.props.restEmployees.map(empl => {
-                return <EditFormListItemEmployees key={empl.id} {...empl} emplOfDep={false}/>
+                return <UpdateFormListItem key={empl.id} {...empl} emplOfDep={false}/>
             });
-
 
         return (
             <>

@@ -1,7 +1,8 @@
-export const checkAuth = () => {
+export const updateAuthFromLocalStorage = () => {
+    const isAuth = localStorage.getItem('auth');
     return {
-        type: 'CHECK_AUTH',
-
+        type: 'SET_AUTH',
+        payload: isAuth
     };
 };
 
@@ -9,7 +10,7 @@ export const setAuth = (isAuth) => {
     localStorage.setItem('auth', isAuth);
     return {
         type: 'SET_AUTH',
-
+        payload: isAuth
     };
 };
 

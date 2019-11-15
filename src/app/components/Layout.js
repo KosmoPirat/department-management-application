@@ -8,10 +8,10 @@ library.add(faEdit, faTrashAlt, faPlusSquare, faTimes, faSearch, faUserTie);
 
 import routes from '../routes';
 
-import MenuContainer from './MenuContainer';
-import MenuItemComponent from './MenuItemComponent';
+import MenuContainer from '../container/MenuContainer';
+import MenuItem from './MenuItem';
 
-export default class LayoutContainer extends React.Component {
+export default class Layout extends React.Component {
     constructor(props) {
         super(props);
         this.brand = "/department-management-application/images/logo.svg";
@@ -26,15 +26,15 @@ export default class LayoutContainer extends React.Component {
         return (
             <>
                 <MenuContainer brand={this.brand}>
-                    <MenuItemComponent href="/" active={this.isActive('/department-management-application/')}>
+                    <MenuItem href="/" active={this.isActive('/department-management-application/')}>
                         Main
-                    </MenuItemComponent>
-                    <MenuItemComponent href="/departments/" active={this.isActive('/departments/')}>
+                    </MenuItem>
+                    <MenuItem href="/departments/" active={this.isActive('/departments/')}>
                         Departments
-                    </MenuItemComponent>
-                    <MenuItemComponent href="/employees/" active={this.isActive('/employees/')}>
+                    </MenuItem>
+                    <MenuItem href="/employees/" active={this.isActive('/employees/')}>
                         Employees
-                    </MenuItemComponent>
+                    </MenuItem>
                 </MenuContainer>
                 <div className="container mb-5">
                     <div className="row">

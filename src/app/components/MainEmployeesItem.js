@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default class MainEmployeesItemComponent extends Component {
+export default class MainEmployeesItem extends Component {
 
     render() {
         return (
