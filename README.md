@@ -1,6 +1,6 @@
 # department-management-application
 
-Приложениедля управления отделами и сотрудниками компании. Проект реализован с использованием React + Redux. Ознакомиться с версией для демонстрации вы можете перейдя по ссылке [React_blog](https://kosmopirat.github.io/department-management-application/)
+Приложениедля управления отделами и сотрудниками компании. Проект реализован с использованием React + Redux. Ознакомиться с версией для демонстрации вы можете перейдя по ссылке [Department App](https://kosmopirat.github.io/department-management-application/)
 
 ## Приступая к работе
 
