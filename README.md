@@ -38,11 +38,14 @@
 
 ` npm start ` - *Запустить для разработки проекта*
 
+` npm run deploy ` - *Запустить для публикации приложения на Git Pages*
+
 ## Разработано с помощью
 
 * [React](https://reactjs.org/docs/) - платформа для разработки приложений
 * [Npm](https://www.npmjs.com/) - менеджер зависимостей
 * [Redux](https://redux.js.org/introduction/getting-started) - библиотека управления состоянием для приложений, написанных на JavaScript.
+* [gh-pages](https://www.npmjs.com/package/gh-pages) - модуль для автоматизации публикации проекта на Git pages
 * [bootstrap](https://getbootstrap.com/) - фреймворк для Front-end разработки
 * [@babel](https://babeljs.io/) - транспайлер, переписывающий код на ES-2015 в код на предыдущем стандарте ES5.
 * [webpack](https://webpack.js.org/) - сборщик проекта
