@@ -9,5 +9,5 @@ const mapStateToProps = (state) => {
 
     };
 };
-// noinspection JSUnusedGlobalSymbols
+
 export default connect(mapStateToProps)(MainItem);

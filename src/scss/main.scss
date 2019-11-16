@@ -30,3 +30,9 @@
 .resize-none {
   resize: none;
 }
+
+@media screen and (max-width: 376px){
+  .w-logo {
+    width: 250px !important;
+  }
+}

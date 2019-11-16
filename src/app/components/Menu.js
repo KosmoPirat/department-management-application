@@ -8,7 +8,7 @@ export default class Menu extends Component {
     render() {
         return (
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <Link to="/" className="navbar-brand">
+                    <Link to="/" className="navbar-brand w-logo">
                         <img className="logo-size" src={this.props.brand} alt="Departmets App"/>
                     </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"

@@ -5,7 +5,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit, faTrashAlt, faPlusSquare, faTimes, faSearch, faUserTie } from '@fortawesome/free-solid-svg-icons';
 library.add(faEdit, faTrashAlt, faPlusSquare, faTimes, faSearch, faUserTie);
 
-
 import routes from '../routes';
 
 import MenuContainer from '../container/MenuContainer';
