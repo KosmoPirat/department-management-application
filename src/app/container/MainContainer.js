@@ -1,12 +1,10 @@
-import {connect} from "react-redux";
+import { connect } from 'react-redux';
 
-import Main from "../components/Main";
+import Main from '../components/Main';
 
-const mapStateToProps = (state) => {
-    return {
-        departmentsList: state.departments.departmentsList,
+const mapStateToProps = (state) => ({
+  depsList: state.departments.depsList,
 
-    };
-};
+});
 
 export default connect(mapStateToProps)(Main);

@@ -5,30 +5,30 @@ import Employees from './container/EmployeesContainer';
 import PageNotFound from './components/PageNotFound';
 
 export default [
-    {
-        path: '/',
-        component: Main,
-        exact: true
-    },
-    {
-        path: '/auth',
-        component: AuthForm,
-        exact: true
-    },
-    {
-        path: '/departments',
-        component: Departments,
-        exact: true
-    },
-    {
-        path: '/employees',
-        component: Employees,
-        exact: true
-    },
-    {
-        path: '*',
-        component: PageNotFound,
-        exact: true
-    },
+  {
+    path: '/',
+    component: Main,
+    exact: true,
+  },
+  {
+    path: '/auth',
+    component: AuthForm,
+    exact: true,
+  },
+  {
+    path: '/departments',
+    component: Departments,
+    exact: true,
+  },
+  {
+    path: '/employees',
+    component: Employees,
+    exact: true,
+  },
+  {
+    path: '*',
+    component: PageNotFound,
+    exact: true,
+  },
 
 ];

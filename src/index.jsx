@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import Layout from './app/components/Layout';
 
-import './scss/main.scss'
+import './scss/main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min';
 import 'jquery/dist/jquery.min';
@@ -15,10 +15,10 @@ import store from './app/store';
 
 
 ReactDom.render(
-    <Provider store={store}>
-        <Router basename="/department-management-application">
-            <Layout/>
-        </Router>
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <Router basename="/department-management-application">
+      <Layout />
+    </Router>
+  </Provider>,
+  document.getElementById('root'),
 );
