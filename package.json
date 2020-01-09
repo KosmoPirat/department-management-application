@@ -2,7 +2,7 @@
     "name": "department-management-application",
     "version": "1.0.0",
     "description": "Test task! Develop department management application",
-    "main": "index.js",
+    "main": "docs/index.html",
     "scripts": {
         "dev": "webpack",
         "build-prod": "webpack --mode production",
