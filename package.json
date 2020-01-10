@@ -2,15 +2,8 @@
     "name": "department-management-application",
     "version": "1.0.0",
     "description": "Test task! Develop department management application",
-    "main": "docs/index.html",
+    "main": "circleTestFile.js",
     "scripts": {
-        "dev": "webpack",
-        "build-prod": "webpack --mode production",
-        "start": "webpack-dev-server --open",
-        "predeploy": "npm run build-prod",
-        "deploy": "gh-pages -d docs",
-        "lint": "eslint src/ --ext .jsx,.js",
-        "lint-fix": "eslint src/ --ext .jsx,.js --fix",
         "test": "jest"
     },
     "browserslist": [
