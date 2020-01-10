@@ -10,7 +10,8 @@
         "predeploy": "npm run build-prod",
         "deploy": "gh-pages -d docs",
         "lint": "eslint src/ --ext .jsx,.js",
-        "lint-fix": "eslint src/ --ext .jsx,.js --fix"
+        "lint-fix": "eslint src/ --ext .jsx,.js --fix",
+        "test": "jest"
     },
     "browserslist": [
         "> 1%",
@@ -26,9 +27,8 @@
         "url": "https://github.com/KosmoPirat/department-management-application/issues"
     },
     "homepage": "https://github.com/KosmoPirat/department-management-application#readme",
-    "dependencies": {
-
-    },
+    "dependencies": {},
     "devDependencies": {
+        "jest": "^24.9.0"
     }
 }
