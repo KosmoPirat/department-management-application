@@ -6,6 +6,7 @@ jobs:
      steps:
        - checkout
        - run: npm ci
+       - run: test
        - run: echo "Complete"
 
 workflows:
